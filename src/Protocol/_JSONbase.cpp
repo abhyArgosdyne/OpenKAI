@@ -14,6 +14,7 @@ namespace kai
 
     _JSONbase::~_JSONbase()
     {
+        DEL(m_pTr);
     }
 
     bool _JSONbase::init(void *pKiss)
@@ -44,7 +45,8 @@ namespace kai
 	bool _JSONbase::link(void)
 	{
 		IF_F(!this->_ModuleBase::link());
-	
+        IF_F(!m_pTr->link());
+
 		Kiss *pK = (Kiss *)m_pKiss;
 
         string n;
@@ -135,7 +137,6 @@ namespace kai
                 handleMsg(m_strB);
                 m_strB.clear();
             }
-            //        m_pT->sleepT ( 0 ); //wait for the IObase to wake me up when received data
 
             m_pTr->autoFPSto();
         }

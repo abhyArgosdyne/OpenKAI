@@ -11,13 +11,13 @@
 #include "../Base/common.h"
 #include "../Base/BASE.h"
 #include "../Script/Kiss.h"
+#include "../Base/_ThreadCtrl.h"
 
 #include "../Arithmetic/Destimator.h"
 #include "../IPC/_SharedMem.h"
 #include "../UI/_Console.h"
 
 #ifdef WITH_3D &&USE_OPEN3D
-#include "../3D/_GeometryViewer.h"
 #include "../3D/Mesh/_MeshStream.h"
 #include "../3D/PointCloud/_PCstream.h"
 #include "../3D/PointCloud/_PCframe.h"
@@ -33,6 +33,9 @@
 #include "../3D/PointCloud/PCregistration/_PCregistCol.h"
 #include "../3D/PointCloud/PCregistration/_PCregistICP.h"
 #include "../3D/PointCloud/PCregistration/_PCregistGlobal.h"
+#ifdef USE_GUI
+#include "../3D/_GeometryViewer.h"
+#endif
 #endif
 
 #ifdef WITH_ACTUATOR
@@ -46,6 +49,7 @@
 #include "../Actuator/Motor/_ZLAC8015.h"
 #include "../Actuator/Motor/_ZLAC8015D.h"
 #include "../Actuator/Motor/_ZDmotor.h"
+#include "../Actuator/Motor/_DDSM.h"
 #ifdef USE_XARM
 #include "../Actuator/Articulated/_xArm.h"
 #endif
@@ -110,22 +114,28 @@
 #include "../Application/Measurement/_RaspiWSbattery.h"
 #endif
 
-#ifdef WITH_APP_3DSCAN &&WITH_3D &&USE_OPEN3D
+#ifdef WITH_APP_3DSCAN &&WITH_3D &&USE_OPEN3D &&USE_GUI
 #include "../Application/3Dscan/_3DScanCalibCam.h"
 #include "../Application/3Dscan/_3DScanCalibOfs.h"
 #include "../Application/3Dscan/_PCscan.h"
 #include "../Application/3Dscan/_PCcalib.h"
 #endif
 
-#ifdef WITH_APP_VZSCAN &&USE_VZENSE &&WITH_3D &&USE_OPEN3D
+#ifdef WITH_APP_VZSCAN &&USE_VZENSE &&WITH_3D &&USE_OPEN3D &&USE_GUI
 #include "../Application/VzScan/_VzScan.h"
 #include "../Application/VzScan/_VzScanAuto.h"
 #include "../Application/VzScan/_VzScanCalib.h"
 #endif
 
-#ifdef WITH_APP_LIVOXSCAN &&USE_LIVOX &&WITH_3D &&USE_OPEN3D
+#ifdef WITH_APP_LIVOXSCAN &&USE_LIVOX &&WITH_3D &&USE_OPEN3D &&USE_GUI
 #include "../Application/LivoxScan/_LivoxScanAuto.h"
 // #include "../Application/LivoxScan/_LivoxScanCalib.h"
+#endif
+
+#ifdef WITH_APP_ROPEWAYSCAN &&USE_VZENSE &&USE_LIVOX &&WITH_3D &&USE_OPEN3D
+#include "../Application/RopewayScan/_RopewayScan.h"
+#include "../Application/RopewayScan/_RopewayScanVz.h"
+#include "../Application/RopewayScan/_RopewayScanLivox.h"
 #endif
 
 #ifdef WITH_APP_ROBOTARM
@@ -217,7 +227,7 @@
 #ifdef USE_DARKNET
 #include "../DNN/Darknet/_YOLO.h"
 #endif
-#ifdef USE_TF-LITE
+#ifdef USE_TF - LITE
 #include "../DNN/TensorFlowLite/_TFmobileNet.h"
 #endif
 #endif

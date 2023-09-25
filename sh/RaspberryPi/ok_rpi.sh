@@ -43,6 +43,7 @@ sudo reboot now
 lsblk -f
 sudo mkfs -t ext4 /dev/nvme0n1
 # sudo mkfs -t vfat /dev/nvme0n1
+# use ntfs for external usb memory applications
 sudo mkdir -p /home/pi/ssd
 sudo mount -t auto /dev/nvme0n1 /home/pi/ssd
 sudo chown pi ssd/
@@ -106,7 +107,7 @@ sudo nano /etc/dhcpcd.conf
 -----------------------
 interface wlan0/eth0
 static ip_address=192.168.144.100/24
-#static_routers=192.168.7.1
+#static routers=192.168.7.1
 #static domain_name_servers=192.168.1.1
 -----------------------
 sudo reboot now

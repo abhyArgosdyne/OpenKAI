@@ -22,12 +22,12 @@ namespace kai
 	{
 		IF_N(!pK);
 
+		ADD_MODULE(_ThreadCtrl);
 		ADD_MODULE(_SharedMem);
 		ADD_MODULE(Destimator);
 		ADD_MODULE(_Console);
 
 #ifdef WITH_3D && USE_OPEN3D
-		ADD_MODULE(_GeometryViewer);
 		ADD_MODULE(_MeshStream);
 		ADD_MODULE(_PCstream);
 		ADD_MODULE(_PCframe);
@@ -43,6 +43,9 @@ namespace kai
 		ADD_MODULE(_PCregistCol);
 		ADD_MODULE(_PCregistICP);
 		ADD_MODULE(_PCregistGlobal);
+#ifdef USE_GUI
+		ADD_MODULE(_GeometryViewer);
+#endif
 #endif
 
 #ifdef WITH_ACTUATOR
@@ -56,6 +59,7 @@ namespace kai
 		ADD_MODULE(_ZLAC8015);
 		ADD_MODULE(_ZLAC8015D);
 		ADD_MODULE(_ZDmotor);
+		ADD_MODULE(_DDSM);
 #ifdef USE_XARM
 		ADD_MODULE(_xArm);
 #endif
@@ -127,15 +131,21 @@ namespace kai
 		ADD_MODULE(_PCcalib);
 #endif
 
-#ifdef WITH_APP_VZSCAN && USE_VZENSE && WITH_3D && USE_OPEN3D
+#ifdef WITH_APP_VZSCAN && USE_VZENSE && WITH_3D && USE_OPEN3D &&USE_GUI
 		ADD_MODULE(_VzScan);
 		ADD_MODULE(_VzScanAuto);
 		ADD_MODULE(_VzScanCalib);
 #endif
 
-#ifdef WITH_APP_LIVOXSCAN && USE_LIVOX && WITH_3D && USE_OPEN3D
+#ifdef WITH_APP_LIVOXSCAN && USE_LIVOX && WITH_3D && USE_OPEN3D &&USE_GUI
 		ADD_MODULE(_LivoxScanAuto);
 //		ADD_MODULE(_LivoxScanCalib);
+#endif
+
+#ifdef WITH_APP_ROPEWAYSCAN && USE_VZENSE && USE_LIVOX && WITH_3D && USE_OPEN3D
+		ADD_MODULE(_RopewayScan);
+		ADD_MODULE(_RopewayScanVz);
+		ADD_MODULE(_RopewayScanLivox);
 #endif
 
 #ifdef WITH_APP_ROBOTARM
